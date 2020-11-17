@@ -12,7 +12,7 @@ let tube = '';
 let box = '';
 
 if ($(`.hb-material-board-wrapper`).length > 0) {
-	board = isCollection ? $(`.hb-collection-materials .hb-material-board-wrapper`)[0].innerHTML : $(`.hb-shipping-materials .hb-material-board-wrapper`)[0].innerHTML;
+	board = isCollection() ? $(`.hb-collection-materials .hb-material-board-wrapper`)[0].innerHTML : $(`.hb-shipping-materials .hb-material-board-wrapper`)[0].innerHTML;
   board = board.replace(/ship_materials/g, 'materials');
 
   tube = $(`.hb-material-tube-wrapper`)[0].innerHTML;
