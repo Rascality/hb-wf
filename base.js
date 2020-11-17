@@ -17,7 +17,8 @@ let box = '';
 
 if ($(`.hb-material-board-wrapper`).length > 0) {
 	board = isCollection() ? $(`.hb-collection-materials .hb-material-board-wrapper`)[0].innerHTML : $(`.hb-shipping-materials .hb-material-board-wrapper`)[0].innerHTML;
-  board = board.replace(/ship_materials/g, 'materials');
+  board = board.replaceAll('ship_materials', 'materials');
+  console.log(board);
 
   tube = $(`.hb-material-tube-wrapper`)[0].innerHTML;
   box = $(`.hb-material-box-wrapper`)[0].innerHTML;
@@ -46,7 +47,7 @@ function buildMaterialTemplate() {
     }
 
     material_template = $('.hb-materials').children().first()[0].innerHTML;
-    material_template = material_template.replace(/ship_materials/g, 'materials');
+    material_template = material_template.replaceAll('ship_materials', 'materials');
     $('.hb-materials').children().first().remove();
   }
 }
