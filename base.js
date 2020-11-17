@@ -16,9 +16,14 @@ let tube = '';
 let box = '';
 
 if ($(`.hb-material-board-wrapper`).length > 0) {
-	board = isCollection() ? $(`.hb-collection-materials .hb-material-board-wrapper`)[0].innerHTML : $(`.hb-shipping-materials .hb-material-board-wrapper`)[0].innerHTML;
-  board = board.replaceAll('ship_materials', 'materials');
-  console.log(board);
+  if (isCollection()) {
+    board = $(`.hb-collection-materials .hb-material-board-wrapper`)[0].innerHTML;
+  } else {
+    $(`[for="ship_materials[0][board]"]`).attr('for', `materials[0][board]`);
+    $(`[name="ship_materials[0][board]"]`).attr('id', `materials[0][board]`).attr('name', `materials[0][board]`).attr('data-name', 'materials[0][board]');
+
+    board = $(`.hb-shipping-materials .hb-material-board-wrapper`)[0].innerHTML;
+  }
 
   tube = $(`.hb-material-tube-wrapper`)[0].innerHTML;
   box = $(`.hb-material-box-wrapper`)[0].innerHTML;
