@@ -4,6 +4,10 @@ jQuery.extend(jQuery.expr[':'], {
   }
 });
 
+function isCollection() {
+  return window.location.href.includes('/collection');
+}
+
 let materialIndex = 0;
 let printIndex = 1;
 let material_template = '';
@@ -17,10 +21,6 @@ if ($(`.hb-material-board-wrapper`).length > 0) {
 
   tube = $(`.hb-material-tube-wrapper`)[0].innerHTML;
   box = $(`.hb-material-box-wrapper`)[0].innerHTML;
-}
-
-function isCollection() {
-  return window.location.href.includes('/collection');
 }
 
 function orderPackaging(show) {
