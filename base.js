@@ -41,7 +41,6 @@ function buildMaterialTemplate() {
 
     material_template = $('.hb-materials').children().first()[0].innerHTML;
     material_template = material_template.replace(/ship_materials/g, 'materials');
-    console.log('Template', material_template);
     $('.hb-materials').children().first().remove();
   }
 }
@@ -62,13 +61,17 @@ function createMaterialElement() {
   div.id = `${id}`;
   $('.hb-material').addClass('hb-collapsed');
   container.appendChild(div);
-  console.log('InnerHTML', div.innerHTML);
-  console.log('Container', container);
 
+  tidyShip(materialIndex);
   hideMaterialSelection(materialIndex);
   setupMaterialListeners(materialIndex);
   $(`#${id} .hb-material-name`).text(setMaterialName(materialIndex));
   materialIndex++;
+}
+
+function tidyShip(materialIndex) {
+  $(`[for="ship_materials[${materialIndex}][board]"]`).attr('for', `materials[${materialIndex}][board]`);
+  $(`[name="ship_materials[${materialIndex}][board]"]`).attr('id', `materials[${materialIndex}][board]`).attr('name', `materials[${materialIndex}][board]`).attr('data-name', `materials[${materialIndex}]`);
 }
 
 function setMaterialName(index) {
