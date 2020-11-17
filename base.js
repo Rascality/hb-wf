@@ -15,8 +15,6 @@ let board = '';
 let tube = '';
 let box = '';
 
-console.log('Latest Version: 4.56');
-
 if ($(`.hb-material-board-wrapper`).length > 0) {
   if (isCollection()) {
     board = $(`.hb-collection-materials .hb-material-board-wrapper`)[0].innerHTML;
@@ -25,7 +23,6 @@ if ($(`.hb-material-board-wrapper`).length > 0) {
     $(`[name="ship_materials[0][board]"]`).attr('id', `materials[0][board]`).attr('name', `materials[0][board]`).attr('data-name', 'materials[0][board]');
 
     board = $(`.hb-shipping-materials .hb-material-board-wrapper`)[0].innerHTML;
-    console.log(board);
   }
 
   tube = $(`.hb-material-tube-wrapper`)[0].innerHTML;
