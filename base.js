@@ -12,9 +12,15 @@ let tube = '';
 let box = '';
 
 if ($(`.hb-material-board-wrapper`).length > 0) {
-	board = $(`.hb-material-board-wrapper`)[0].innerHTML;
+	board = isCollection ? $(`.hb-collection-materials .hb-material-board-wrapper`)[0].innerHTML : $(`.hb-shipping-materials .hb-material-board-wrapper`)[0].innerHTML;
+  board = board.replace(/ship_materials/g, 'materials');
+
   tube = $(`.hb-material-tube-wrapper`)[0].innerHTML;
   box = $(`.hb-material-box-wrapper`)[0].innerHTML;
+}
+
+function isCollection() {
+  return window.location.href.includes('/collection');
 }
 
 function orderPackaging(show) {
@@ -31,7 +37,7 @@ function orderPackaging(show) {
 
 function buildMaterialTemplate() {
   if ($('.hb-materials').children().first().length > 0) {
-    if (window.location.href.includes('/collection')) {
+    if (isCollection()) {
       $('.hb-shipping-materials').remove();
       $('.hb-collection-materials').addClass('show');
     } else {
@@ -51,7 +57,6 @@ function createPackagingOptions(packagingOptions, index) {
 
 function createMaterialElement() {
   let id = `hb-material-${materialIndex}`;
-
   let template = material_template.replaceAll('[0]', `[${materialIndex}]`);
 
   let container = $('.hb-materials').first()[0];
@@ -62,16 +67,10 @@ function createMaterialElement() {
   $('.hb-material').addClass('hb-collapsed');
   container.appendChild(div);
 
-  tidyShip(materialIndex);
   hideMaterialSelection(materialIndex);
   setupMaterialListeners(materialIndex);
   $(`#${id} .hb-material-name`).text(setMaterialName(materialIndex));
   materialIndex++;
-}
-
-function tidyShip(materialIndex) {
-  $(`[for="ship_materials[${materialIndex}][board]"]`).attr('for', `materials[${materialIndex}][board]`);
-  $(`[name="ship_materials[${materialIndex}][board]"]`).attr('id', `materials[${materialIndex}][board]`).attr('name', `materials[${materialIndex}][board]`).attr('data-name', `materials[${materialIndex}]`);
 }
 
 function setMaterialName(index) {
