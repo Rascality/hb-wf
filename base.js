@@ -17,8 +17,6 @@ if ($(`.hb-material-board-wrapper`).length > 0) {
   box = $(`.hb-material-box-wrapper`)[0].innerHTML;
 }
 
-console.log('Loaded Base Javascript!');
-
 function orderPackaging(show) {
   if (show) {
     $('.hb-materials').show();
@@ -42,7 +40,8 @@ function buildMaterialTemplate() {
     }
 
     material_template = $('.hb-materials').children().first()[0].innerHTML;
-    material_template = material_template.replaceAll('ship_materials', 'materials');
+    material_template = material_template.replace(/ship_materials/g, 'materials');
+    console.log('Template', material_template);
     $('.hb-materials').children().first().remove();
   }
 }
@@ -63,6 +62,8 @@ function createMaterialElement() {
   div.id = `${id}`;
   $('.hb-material').addClass('hb-collapsed');
   container.appendChild(div);
+  console.log('InnerHTML', div.innerHTML);
+  console.log('Container', container);
 
   hideMaterialSelection(materialIndex);
   setupMaterialListeners(materialIndex);
