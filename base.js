@@ -275,7 +275,7 @@ function isValidForm($el) {
     var hasPrints = $el.find('.hb-print').length > 0;
     valid = valid && hasPrints;
   }
-  return valid && hasPrints;
+  return valid;
 }
 
 // Setup form to not show the errors until submitted.
