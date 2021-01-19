@@ -275,6 +275,10 @@ function isValidForm($el) {
     var hasPrints = $el.find('.hb-print').length > 0;
     valid = valid && hasPrints;
   }
+  if ($el.find('input[name="packaging_materials"]') && $el.find('input#Yes[name="packaging_materials"]').is(':checked')) {
+    var hasPackaging = $el.find('.hb-material').length > 0;
+    valid = valid && hasPackaging;
+  }
   return valid;
 }
 
