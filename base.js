@@ -271,7 +271,11 @@ function isValidForm($el) {
     var isValid = $(this).is('input[type="checkbox"]') ? $(this).is(':checked') : ($(this).val() != null && $(this).val() != '');
     valid = valid && isValid;
   });
-  return valid;
+  if ($el.find('.hb-prints').length > 0) {
+    var hasPrints = $el.find('.hb-print').length > 0;
+    valid = valid && hasPrints;
+  }
+  return valid && hasPrints;
 }
 
 // Setup form to not show the errors until submitted.
