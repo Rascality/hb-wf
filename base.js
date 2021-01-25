@@ -312,12 +312,14 @@ function getFormData(formEl){
   return indexed_array;
 }
 
-$('#email-form').on('keyup keypress', function(e) {
-  var keyCode = e.keyCode || e.which;
-  if (keyCode === 13 && !$(e.target).is('textarea')) {
-    e.preventDefault();
-    return false;
+$('#email-form').submit(function(event) {
+  var form = $('.hb-next-btn.hb-submit-btn').parents('form');
+  form.children('input.hb-json-form').remove();
+  var formData = getFormData(form);
+  if (form.children('input.hb-json-form').length === 0) {
+    form.append(`<input type="hidden" data-name="json-form" name="json-form" class="hb-json-form"/>`);
   }
+  form.children('input.hb-json-form').val(`JSON:${JSON.stringify(formData)}`);
 });
 
 $('.hb-next-btn.hb-submit-btn').click(function() {
