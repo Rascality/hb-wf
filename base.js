@@ -312,6 +312,14 @@ function getFormData(formEl){
   return indexed_array;
 }
 
+$('#email-form').on('keyup keypress', function(e) {
+  var keyCode = e.keyCode || e.which;
+  if (keyCode === 13 && !$(e.target).is('textarea')) {
+    e.preventDefault();
+    return false;
+  }
+});
+
 $('.hb-next-btn.hb-submit-btn').click(function() {
   var form = $('.hb-next-btn.hb-submit-btn').parents('form');
   form.children('input.hb-json-form').remove();
