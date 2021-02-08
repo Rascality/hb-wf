@@ -19,8 +19,8 @@ if ($(`.hb-material-board-wrapper`).length > 0) {
   if (isCollection()) {
     board = $(`.hb-collection-materials .hb-material-board-wrapper`)[0].innerHTML;
   } else {
-    $(`[for="ship_materials[0][board]"]`).attr('for', `materials[0][board]`);
-    $(`[name="ship_materials[0][board]"]`).attr('id', `materials[0][board]`).attr('name', `materials[0][board]`).attr('data-name', 'materials[0][board]');
+    $(`[for="ship_materials__0__board"]`).attr('for', `materials__0__board`);
+    $(`[name="ship_materials__0__board"]`).attr('id', `materials__0__board`).attr('name', `materials__0__board`).attr('data-name', 'materials__0__board');
 
     board = $(`.hb-shipping-materials .hb-material-board-wrapper`)[0].innerHTML;
   }
@@ -58,12 +58,12 @@ function buildMaterialTemplate() {
 }
 
 function createPackagingOptions(packagingOptions, index) {
-	return packagingOptions.replaceAll('[0]', `[${index}]`);
+	return packagingOptions.replaceAll('__0__', `__${index}__`);
 }
 
 function createMaterialElement() {
   let id = `hb-material-${materialIndex}`;
-  let template = material_template.replaceAll('[0]', `[${materialIndex}]`);
+  let template = material_template.replaceAll('__0__', `__${materialIndex}__`);
 
   let container = $('.hb-materials').first()[0];
   let div = document.createElement('div');
@@ -80,15 +80,15 @@ function createMaterialElement() {
 }
 
 function setMaterialName(index) {
-  let packaging = $(`[name="materials[${index}][packaging]"]`).val();
+  let packaging = $(`[name="materials__${index}__packaging"]`).val();
   if (packaging === "Backing Board") {
-    let board = $(`[name="materials[${index}][board]"]`).val();
+    let board = $(`[name="materials__${index}__board"]`).val();
     return `${packaging} - ${board}`;
   } else if (packaging === "Mailer Tube") {
-    let tube = $(`[name="materials[${index}][tube]"]`).val();
+    let tube = $(`[name="materials__${index}__tube"]`).val();
     return `${packaging} - ${tube}`;
   } else if (packaging === "Mailer Boxes") {
-    let boxes = $(`[name="materials[${index}][box]"]`).val();
+    let boxes = $(`[name="materials__${index}__box"]`).val();
     return `${packaging} - ${boxes}`;
   }
   return packaging;
@@ -96,7 +96,7 @@ function setMaterialName(index) {
 
 function hideMaterialSelection(index) {
   let id = `hb-material-${index}`;
-  let packaging = $(`[name="materials[${index}][packaging]"]`).val();
+  let packaging = $(`[name="materials__${index}__packaging"]`).val();
 
   let boardWrapper = $(`#${id} .hb-material-board-wrapper`);
   let tubeWrapper = $(`#${id} .hb-material-tube-wrapper`);
@@ -124,15 +124,15 @@ function hideMaterialSelection(index) {
     hideAndRemoveChildren(boxWrapper);
   }
 
-  $(`[name="materials[${index}][board]"]`).on('change', function() {
+  $(`[name="materials__${index}__board"]`).on('change', function() {
     $(`#${id} .hb-material-name`).text(setMaterialName(index));
   });
 
-  $(`[name="materials[${index}][tube]"]`).on('change', function() {
+  $(`[name="materials__${index}__tube"]`).on('change', function() {
     $(`#${id} .hb-material-name`).text(setMaterialName(index));
   });
 
-  $(`[name="materials[${index}][box]"]`).on('change', function() {
+  $(`[name="materials__${index}__box"]`).on('change', function() {
     $(`#${id} .hb-material-name`).text(setMaterialName(index));
   });
 }
@@ -155,25 +155,25 @@ function setupMaterialListeners(index) {
     $(`#${id}`).removeClass('hb-collapsed');
   });
 
-  $(`[name="materials[${index}][packaging]"]`).on('change', function() {
+  $(`[name="materials__${index}__packaging"]`).on('change', function() {
     $(`#${id} .hb-material-name`).text(setMaterialName(index));
     hideMaterialSelection(index);
   });
 
-  $(`[name="materials[${index}][board]"]`).on('change', function() {
+  $(`[name="materials__${index}__board"]`).on('change', function() {
     $(`#${id} .hb-material-name`).text(setMaterialName(index));
   });
 
-  $(`[name="materials[${index}][tube]"]`).on('change', function() {
+  $(`[name="materials__${index}__tube"]`).on('change', function() {
     $(`#${id} .hb-material-name`).text(setMaterialName(index));
   });
 
-  $(`[name="materials[${index}][box]"]`).on('change', function() {
+  $(`[name="materials__${index}__box"]`).on('change', function() {
     $(`#${id} .hb-material-name`).text(setMaterialName(index));
   });
 
-  $(`[name="materials[${index}][quantity]"]`).on('change', function() {
-    $(`#${id} .hb-material-quantity`).text($(`[name="materials[${index}][quantity]"]`).val());
+  $(`[name="materials__${index}__quantity"]`).on('change', function() {
+    $(`#${id} .hb-material-quantity`).text($(`[name="materials__${index}__quantity"]`).val());
   });
 
   $(`#${id} .hb-material-collapsed-remove`).on('click', function() {
@@ -191,8 +191,8 @@ function setupPrintListeners(index) {
     $(`.hb-print:not(#${id})`).addClass('hb-collapsed');
     $(`#${id}`).removeClass('hb-collapsed');
   });
-  $(`[name="prints[${index}][file_name]"]`).on('change', function() {
-    $(`#${id} .hb-print-collapsed-name`).text($(`[name="prints[${index}][file_name]"]`).val());
+  $(`[name="prints__${index}__file_name"]`).on('change', function() {
+    $(`#${id} .hb-print-collapsed-name`).text($(`[name="prints__${index}__file_name__"]`).val());
   });
   $(`#${id} .hb-print-collapsed-remove`).on('click', function() {
     $(`#${id}`).remove();
@@ -224,7 +224,7 @@ if ($('.hb-prints').children().first().length > 0) {
 
 $('#add-new-print').on('click', function () {
   let id = `hb-print-${printIndex}`;
-  let template = original_template.replaceAll('[0]', `[${printIndex}]`);
+  let template = original_template.replaceAll('__0__', `__${printIndex}__`);
 
   let container = $('.hb-prints').first()[0];
   let div = document.createElement('div');
@@ -301,36 +301,6 @@ $('.hb-next-btn').click(function() {
   disableFormBtn(valid);
   submitted = !valid;
   return valid;
-});
-
-function getFormData(formEl){
-  var unindexed_array = formEl.serializeArray();
-  var indexed_array = {};
-  $.map(unindexed_array, function(n, i){
-    indexed_array[n['name']] = n['value'];
-  });
-  return indexed_array;
-}
-
-$('#email-form').submit(function(event) {
-  var form = $('.hb-next-btn.hb-submit-btn').parents('form');
-  form.children('input.hb-json-form').remove();
-  var formData = getFormData(form);
-  if (form.children('input.hb-json-form').length === 0) {
-    form.append(`<input type="hidden" data-name="json-form" name="json-form" class="hb-json-form"/>`);
-  }
-  form.children('input.hb-json-form').val(`JSON:${JSON.stringify(formData)}`);
-});
-
-$('.hb-next-btn.hb-submit-btn').click(function() {
-  var form = $('.hb-next-btn.hb-submit-btn').parents('form');
-  form.children('input.hb-json-form').remove();
-  var formData = getFormData(form);
-  if (form.children('input.hb-json-form').length === 0) {
-    form.append(`<input type="hidden" data-name="json-form" name="json-form" class="hb-json-form"/>`);
-  }
-  form.children('input.hb-json-form').val(`JSON:${JSON.stringify(formData)}`);
-  return true;
 });
 
 $(".paper-select-field.box-size-select-field.board-select-field.tube-select-field.packaging-select-field").each(function(){
