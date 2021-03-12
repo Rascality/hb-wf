@@ -28,10 +28,10 @@ if (DateTime) {
     } else {
       try {
         var open = DateTime.fromJSDate(new Date(currentHours['open']));
-        var openHour = open.toLocaleString({ hour: 'numeric', minute: '2-digit', hour12: true }).replace(':00 ', '');
+        var openHour = open.toLocaleString({ hour: 'numeric', minute: '2-digit', hour12: true }).replace(':00', '').replaceAll(' ', '');
 
         var close = DateTime.fromJSDate(new Date(currentHours['close']));
-        var closeHour = close.toLocaleString({ hour: 'numeric', minute: '2-digit', hour12: true }).replace(':00 ', '');
+        var closeHour = close.toLocaleString({ hour: 'numeric', minute: '2-digit', hour12: true }).replace(':00', '').replaceAll(' ', '');
 
         message = `${openHour}–${closeHour} Today`;
       } catch (err) {
