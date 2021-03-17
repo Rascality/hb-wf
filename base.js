@@ -269,6 +269,11 @@ function isValidForm($el) {
   var valid = true;
   $el.find('input,textarea,select').filter('[required]').each(function() {
     var isValid = $(this).is('input[type="checkbox"]') ? $(this).is(':checked') : ($(this).val() != null && $(this).val() != '');
+    if (!isValid) {
+      $(this).addClass('is-error');
+    } else {
+      $(this).removeClass('is-error');
+    }
     valid = valid && isValid;
   });
   if ($el.find('.hb-prints').length > 0) {
