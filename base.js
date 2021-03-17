@@ -284,14 +284,30 @@ function isValidForm($el) {
     var hasPackaging = $el.find('.hb-material').length > 0;
     valid = valid && hasPackaging;
   }
+  if ($el.find('.hb-filetransfer-wrapper').length > 0) {
+    valid && fileTransferSelected;
+  }
+  if ($el.find('.hb-packaging-materials').length > 0) {
+    valid && packagingSelected;
+  }
   return valid;
 }
 
 // Setup form to not show the errors until submitted.
 var submitted = false;
 var disabled = false;
+var fileTransferSelected = false;
+var packagingSelected = false;
 
 $('.hb-required-error').css('visibility', 'hidden');
+
+$('.hb-filetransfer-wrapper').find('input[type=radio]').change(() => {
+  fileTransferSelected = true;
+});
+
+$('.hb-packaging-materials').find('input[type=radio]').change(() => {
+  packagingSelected = true;
+});
 
 $('.hb-collaborate-form-step').find('input,textarea,select').filter('[required]').on('change', function() {
   var formStep = $(this).parents('.hb-collaborate-form-step');
