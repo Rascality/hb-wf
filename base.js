@@ -192,7 +192,7 @@ function setupPrintListeners(index) {
     $(`#${id}`).removeClass('hb-collapsed');
   });
   $(`[name="prints__${index}__file_name"]`).on('change', function() {
-    $(`#${id} .hb-print-collapsed-name`).text($(`[name="prints__${index}__file_name__"]`).val());
+    $(`#${id} .hb-print-collapsed-name`).text($(`[name="prints__${index}__file_name"]`).val());
   });
   $(`#${id} .hb-print-collapsed-remove`).on('click', function() {
     $(`#${id}`).remove();
