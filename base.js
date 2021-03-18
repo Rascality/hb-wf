@@ -191,8 +191,8 @@ function setupPrintListeners(index) {
     $(`.hb-print:not(#${id})`).addClass('hb-collapsed');
     $(`#${id}`).removeClass('hb-collapsed');
   });
-  $(`[name="prints__${index}__file_name"]`).on('change', function() {
-    $(`#${id} .hb-print-collapsed-name`).text($(`[name="prints__${index}__file_name"]`).val());
+  $(`[name="prints__${index}__file"]`).on('change', function() {
+    $(`#${id} .hb-print-collapsed-name`).text($(`[name="prints__${index}__file"]`).val());
   });
   $(`#${id} .hb-print-collapsed-remove`).on('click', function() {
     $(`#${id}`).remove();
