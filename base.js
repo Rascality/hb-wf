@@ -265,8 +265,28 @@ function disableFormBtn(valid) {
   }
 }
 
+function cleanupPrintSelect($el) {
+  $el.find('.hb-prints').find('select').each(function() {
+    let invalidOption = '';
+    $(this).find('option').each(function() {
+      if ($(this).text() === '') {
+        invalidOption = $(this).val();
+      }
+    });
+    if ($(this).val() === invalidOption) {
+      $(this).val('');
+    }
+  });
+}
+
 function isValidForm($el) {
   var valid = true;
+  if ($el.find('.hb-prints').length > 0) {
+    cleanupPrintSelect($el);
+    var hasPrints = $el.find('.hb-print').length > 0;
+    valid = valid && hasPrints;
+  }
+
   $el.find('input,textarea,select').filter('[required]').each(function() {
     var isValid = $(this).is('input[type="checkbox"]') ? $(this).is(':checked') : ($(this).val() != null && $(this).val() != '');
     if (!isValid) {
@@ -276,10 +296,7 @@ function isValidForm($el) {
     }
     valid = valid && isValid;
   });
-  if ($el.find('.hb-prints').length > 0) {
-    var hasPrints = $el.find('.hb-print').length > 0;
-    valid = valid && hasPrints;
-  }
+
   if ($el.find('input[name="packaging_materials"]') && $el.find('input#Yes[name="packaging_materials"]').is(':checked')) {
     var hasPackaging = $el.find('.hb-material').length > 0;
     valid = valid && hasPackaging;
